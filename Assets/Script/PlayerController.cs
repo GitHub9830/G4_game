@@ -11,13 +11,18 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;//プレイヤーのRIgidbody2Dを入れるところ
     SpriteRenderer sr;
 
+    bool canJamp;//ジャンプが出来る時にtrue
+    float jampPower;//ジャンプする力
+
     //初期値の設定など
     void Start()
     {
-        moveSpeed = 5f;
         rb = this.GetComponent<Rigidbody2D>();
         sr = this.GetComponent<SpriteRenderer>();
+        moveSpeed = 5f;
         stopMove = false;
+        canJamp = true;
+        jampPower = 100f;
     }
 
     //毎秒呼び出される
@@ -30,17 +35,17 @@ public class PlayerController : MonoBehaviour
     void playerMove()
     {
         var hori = Input.GetAxisRaw("Horizontal");//左右方向の入力(横移動)
-        var vart = Input.GetAxisRaw("Vertical");//垂直方向の入力(ジャンプ)
+        //var vart = Input.GetAxisRaw("Vertical");//垂直方向の入力(ジャンプ)
 
         //横移動
         if (hori != 0)
         {
             changeSpriteDir(hori);//進んでいる方向に画像を合わせる
             //押したら動く
-            if (rb.velocity.magnitude < moveSpeed)
+            if (Mathf.Abs(rb.velocity.x) < moveSpeed)
             {
                 movePower = hori * moveSpeed;
-                rb.AddForce(new Vector2(movePower, 0));
+                rb.AddForce(Vector2.right * movePower);
                 stopMove = true;
             }
         }
@@ -50,16 +55,13 @@ public class PlayerController : MonoBehaviour
             if (stopMove)
             {
                 //0にするとうまくいきません。おそらく0の時にプログラムの処理が間に合っていないから
-                if (rb.velocity.magnitude > moveSpeed/10)
+                if (Mathf.Abs(rb.velocity.x) > moveSpeed/10)
                 {
-                    rb.AddForce(new Vector2(-movePower, 0));
+                    rb.AddForce(Vector2.right * -movePower);
                 }
             }
         }
-
-
-
-
+        jamp();//ジャンプの処理
     }
 
 
@@ -75,6 +77,19 @@ public class PlayerController : MonoBehaviour
         {
             //falseの時にもとに戻す
             sr.flipX=false;
+        }
+    }
+
+    //プレイヤーのジャンプの処理
+    void jamp()
+    {
+        if (canJamp)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                rb.AddForce(Vector2.up * jampPower);
+                Debug.Log("a");
+            }
         }
     }
 
