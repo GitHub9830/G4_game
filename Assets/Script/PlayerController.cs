@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     //毎秒呼び出される
     void Update()
     {
-        playerMove();
+        playerMove();//プレイヤーの左右移動
     }
 
     //プレイヤーの左右移動
@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
         //横移動
         if (hori != 0)
         {
-            changeSpriteDir(hori);
+            changeSpriteDir(hori);//進んでいる方向に画像を合わせる
             //押したら動く
             if (rb.velocity.magnitude < moveSpeed)
             {
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
             if (stopMove)
             {
                 //0にするとうまくいきません。おそらく0の時にプログラムの処理が間に合っていないから
-                if (rb.velocity.magnitude > 1)
+                if (rb.velocity.magnitude > moveSpeed/10)
                 {
                     rb.AddForce(new Vector2(-movePower, 0));
                 }
@@ -78,6 +78,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //当たり判定（入った瞬間）
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
