@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
         moveSpeed = 5f;
         stopMove = false;
         canJamp = true;
-        jampPower = 100f;
+        jampPower = 10f;
     }
 
     //ñàïbåƒÇ—èoÇ≥ÇÍÇÈ
@@ -87,8 +87,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                rb.AddForce(Vector2.up * jampPower);
-                Debug.Log("a");
+                rb.AddForce(Vector2.up * jampPower, ForceMode2D.Impulse);
             }
         }
     }

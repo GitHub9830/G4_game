@@ -80,7 +80,6 @@ public class LightBonfire : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             addLightTime();//•°‰Î‚ÌŽžŠÔ’Ç‰Á
-            Debug.Log("addTime");
         }
     }
 }
