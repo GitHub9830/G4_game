@@ -77,4 +77,9 @@ public class PlayerController : MonoBehaviour
             sr.flipX=false;
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
+    }
 }
