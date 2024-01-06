@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    //移動関連
     float moveSpeed;//プレイヤーの横移動の速度
     float movePower;//プレイヤーの横移動の速度
     bool stopMove;//プレイヤーの横移動が終わったかどうか
@@ -11,18 +12,33 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;//プレイヤーのRIgidbody2Dを入れるところ
     SpriteRenderer sr;
 
-    bool canJamp;//ジャンプが出来る時にtrue
-    float jampPower;//ジャンプする力
+    //ジャンプ関連
+    bool canJamp;//ジャンプできるか
+    float jampPos;//ジャンプした地点
+    float maxJampPos;//ジャンプできる最高地点
+    float jampHeight;//ジャンプする高さ
+    float jampUpTime;//ジャンプで上昇する時間
+    float jampAcc;//ジャンプの加速度
+    bool jampUpPos;//ジャンプで上昇中
+    float maxJampAcc;//ジャンプの最大加速度
 
     //初期値の設定など
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
         sr = this.GetComponent<SpriteRenderer>();
+        
         moveSpeed = 5f;
         stopMove = false;
+
         canJamp = true;
-        jampPower = 10f;
+        jampHeight = 1f;
+        jampPos = rb.position.y;
+        maxJampPos = jampPos + jampHeight;
+        jampUpTime = 5f;
+        jampAcc = jampHeight / jampUpTime;
+        jampUpPos = false;
+        maxJampAcc = 10f;
     }
 
     //毎秒呼び出される
@@ -87,7 +103,46 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                rb.AddForce(Vector2.up * jampPower, ForceMode2D.Impulse);
+                jampPos = rb.position.y;
+                maxJampPos = jampPos + jampHeight;
+                jampAcc = jampHeight / jampUpTime;
+
+                canJamp = false;
+                jampUpPos = true;
+            }
+        }
+        else
+        {
+            if (jampUpPos)
+            {
+                if (rb.position.y >= maxJampPos)
+                {
+                    jampUpPos = false;
+                }
+                else
+                {
+                    if(rb.velocity.y < maxJampAcc)
+                    {
+                        rb.AddForce(Vector2.up * jampAcc, ForceMode2D.Impulse);
+                    }
+                }
+            }
+            else
+            {
+                if (rb.velocity.y > -maxJampAcc)
+                {
+                    rb.AddForce(Vector2.up * -jampAcc,ForceMode2D.Impulse);
+                }
+                /*
+                if (rb.position.y >= jampPos)
+                {
+                    rb.AddForce(Vector2.up * -jampAcc);
+                }
+                else
+                {
+
+                }
+                */
             }
         }
     }
@@ -95,6 +150,6 @@ public class PlayerController : MonoBehaviour
     //当たり判定（入った瞬間）
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
+        canJamp = true;
     }
 }
