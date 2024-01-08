@@ -12,8 +12,8 @@ public class MoveBackGround : MonoBehaviour
         background = this.GetComponent<Image>();
     }
 
-    public void moveBackGround(float playerPos)
+    public void moveBackGround(Vector2 playerPos)
     {
-        background.material.mainTextureOffset = new Vector2(playerPos / 100, 0f);
+        background.material.mainTextureOffset = new Vector2(playerPos.x / 100, playerPos.y / 100);
     }
 }

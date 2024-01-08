@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
         stopMove = false;
 
         canJamp = true;
-        jampHeight = 5f;
+        jampHeight = 3;
         jampPos = rb.position.y;
         maxJampPos = jampPos + jampHeight;
         jampUpTime = 0.2f;
@@ -91,9 +91,10 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+        goDown();//ジャンプ中じゃないときの落下
         jamp();//ジャンプの処理
-        rb.position = new Vector2(Mathf.Clamp(rb.position.x,-mapSize,mapSize),rb.position.y);
-        moveBackGround.moveBackGround(rb.position.x);
+        rb.position = new Vector2(Mathf.Clamp(rb.position.x,-mapSize,mapSize),rb.position.y);//プレイヤーの動ける範囲
+        moveBackGround.moveBackGround(rb.position);//背景の移動
     }
 
 
@@ -112,6 +113,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //ジャンプ中じゃないときの落下
     void goDown()
     {
         if (!canJamp) return;
@@ -138,7 +140,6 @@ public class PlayerController : MonoBehaviour
                 canJamp = false;
                 jampUpPos = true;
             }
-            goDown();
         }
         else
         {
@@ -187,7 +188,6 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        Debug.Log(canJamp);
     }
 
     //当たり判定（入った瞬間）
