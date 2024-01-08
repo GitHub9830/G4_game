@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
         jampHeight = 5f;
         jampPos = rb.position.y;
         maxJampPos = jampPos + jampHeight;
-        jampUpTime = 0.3f;
+        jampUpTime = 0.2f;
         jampAcc = jampHeight / jampUpTime;
         jampUpPos = false;
         maxJampAcc = jampAcc * 2;
@@ -114,7 +114,14 @@ public class PlayerController : MonoBehaviour
 
     void goDown()
     {
-
+        if (canJamp) return;
+        if(rb.velocity.y != 0)
+        {
+            if (rb.velocity.y > -maxJampAcc)
+            {
+                rb.AddForce(Vector2.up * -jampAcc * 2);
+            }
+        }
     }
 
     //プレイヤーのジャンプの処理
@@ -151,7 +158,12 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                if(jampFlyTime >= maxJampFlyTime)
+                if (rb.velocity.y == 0)
+                {
+                    canJamp = true;
+                    return;
+                }
+                if (jampFlyTime >= maxJampFlyTime)
                 {
                     if(rb.position.y > jampPos)
                     {
@@ -174,11 +186,12 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+        Debug.Log(canJamp);
     }
 
     //当たり判定（入った瞬間）
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        canJamp = true;
+        
     }
 }
