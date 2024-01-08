@@ -334,6 +334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 050e8f66714043d4c871938e3a87ebdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSprite: {fileID: 548531845}
   background: {fileID: 883013915}
 --- !u!61 &71714206
 BoxCollider2D:
