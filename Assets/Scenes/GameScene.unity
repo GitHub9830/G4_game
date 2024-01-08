@@ -1385,7 +1385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WaveCanvasObj: {fileID: 1093408410}
-  waveTextObj: {fileID: 0}
+  waveTextObj: {fileID: 281566484}
   textPosX: 0
   textStartPos: {x: 0, y: 0}
   textEndPos: {x: 0, y: 0}
