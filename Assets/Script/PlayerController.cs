@@ -114,12 +114,12 @@ public class PlayerController : MonoBehaviour
 
     void goDown()
     {
-        if (canJamp) return;
+        if (!canJamp) return;
         if(rb.velocity.y != 0)
         {
             if (rb.velocity.y > -maxJampAcc)
             {
-                rb.AddForce(Vector2.up * -jampAcc * 2);
+                rb.AddForce(Vector2.up * -jampAcc);
             }
         }
     }
@@ -138,6 +138,7 @@ public class PlayerController : MonoBehaviour
                 canJamp = false;
                 jampUpPos = true;
             }
+            goDown();
         }
         else
         {
