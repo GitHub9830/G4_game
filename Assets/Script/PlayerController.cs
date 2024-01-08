@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,7 +12,10 @@ public class PlayerController : MonoBehaviour
     bool stopMove;//プレイヤーの横移動が終わったかどうか
 
     Rigidbody2D rb;//プレイヤーのRIgidbody2Dを入れるところ
+    public GameObject playerSprite;
     SpriteRenderer sr;
+    public GameObject background;
+    MoveBackGround moveBackGround;//背景
 
     //ジャンプ関連
     bool canJamp;//ジャンプできるか
@@ -21,24 +26,34 @@ public class PlayerController : MonoBehaviour
     float jampAcc;//ジャンプの加速度
     bool jampUpPos;//ジャンプで上昇中
     float maxJampAcc;//ジャンプの最大加速度
+    float jampFlyTime;//ジャンプ時の浮遊時間
+    float maxJampFlyTime;//ジャンプ時の最大浮遊時間
+
+    //マップのサイズ
+    float mapSize;
 
     //初期値の設定など
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
-        sr = this.GetComponent<SpriteRenderer>();
+        sr = playerSprite.GetComponent<SpriteRenderer>();
+        moveBackGround = background.GetComponent<MoveBackGround>();
         
         moveSpeed = 5f;
         stopMove = false;
 
         canJamp = true;
-        jampHeight = 1f;
+        jampHeight = 5f;
         jampPos = rb.position.y;
         maxJampPos = jampPos + jampHeight;
-        jampUpTime = 5f;
+        jampUpTime = 2f;
         jampAcc = jampHeight / jampUpTime;
         jampUpPos = false;
         maxJampAcc = 10f;
+        jampFlyTime = 0;
+        maxJampFlyTime = 0.5f;
+
+        mapSize = 20;
     }
 
     //毎秒呼び出される
@@ -51,7 +66,6 @@ public class PlayerController : MonoBehaviour
     void playerMove()
     {
         var hori = Input.GetAxisRaw("Horizontal");//左右方向の入力(横移動)
-        //var vart = Input.GetAxisRaw("Vertical");//垂直方向の入力(ジャンプ)
 
         //横移動
         if (hori != 0)
@@ -78,6 +92,8 @@ public class PlayerController : MonoBehaviour
             }
         }
         jamp();//ジャンプの処理
+        rb.position = new Vector2(Mathf.Clamp(rb.position.x,-mapSize,mapSize),rb.position.y);
+        moveBackGround.moveBackGround(rb.position.x);
     }
 
 
@@ -117,6 +133,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (rb.position.y >= maxJampPos)
                 {
+                    jampFlyTime = 0;
                     jampUpPos = false;
                 }
                 else
@@ -129,20 +146,17 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                if (rb.velocity.y > -maxJampAcc)
+                if(jampFlyTime >= maxJampFlyTime)
                 {
-                    rb.AddForce(Vector2.up * -jampAcc,ForceMode2D.Impulse);
-                }
-                /*
-                if (rb.position.y >= jampPos)
-                {
-                    rb.AddForce(Vector2.up * -jampAcc);
+                    if (rb.velocity.y > -maxJampAcc)
+                    {
+                        rb.AddForce(Vector2.up * -1);
+                    }
                 }
                 else
                 {
-
+                    jampFlyTime += Time.deltaTime;
                 }
-                */
             }
         }
     }
