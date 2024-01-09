@@ -11,6 +11,12 @@ public class WaveManager : MonoBehaviour
     public TextMeshProUGUI waveTextObj;
     RemainEnemy remainEnemy;
 
+    public GameObject player;
+    PlayerController playerController
+
+    public GameObject bonfire;
+    LightBonfire lightBonfire;
+
     public GameObject enemyGenerate;
     EnemyGenerater enemyGenerater;
     EnemyGenerater2 enemyGenerater2;
@@ -36,6 +42,8 @@ public class WaveManager : MonoBehaviour
         remainEnemy = this.GetComponent<RemainEnemy>();
         enemyGenerater = enemyGenerate.GetComponent<EnemyGenerater>();
         enemyGenerater2 = enemyGenerate.GetComponent<EnemyGenerater2>();
+        playerController = player.GetComponent<PlayerController>();
+        lightBonfire = bonfire.GetComponent<LightBonfire>();
         begineWave = false;
         moveText = false;
         enemyNum = 10;
@@ -113,11 +121,14 @@ public class WaveManager : MonoBehaviour
 
     public void endWave()
     {
-        begineWave = false;
-        waveCount++;
-        waveTextObj.text = "Wave" + waveCount;
-        enemyNum += 2;
-        startWave();
+        if (lightBonfire.bonfireBar.fillAmount > 0)
+        {
+            begineWave = false;
+            waveCount++;
+            waveTextObj.text = "Wave" + waveCount;
+            enemyNum += 2;
+            startWave();
+        }
     }
 
     public bool getBegineWave()
@@ -129,5 +140,8 @@ public class WaveManager : MonoBehaviour
     {
         return waveCount;
     }
-
+    public int getKillCount()
+    {
+        return playerController.killEnemy;
+    }
 }
