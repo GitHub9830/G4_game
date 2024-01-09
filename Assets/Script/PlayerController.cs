@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
         jampHeight = 3;
         jampPos = rb.position.y;
         maxJampPos = jampPos + jampHeight;
-        jampUpTime = 0.2f;
+        jampUpTime = 0.1f;
         jampAcc = jampHeight / jampUpTime;
         jampUpPos = false;
         maxJampAcc = jampAcc * 2;
