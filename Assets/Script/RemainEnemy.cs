@@ -20,7 +20,6 @@ public class RemainEnemy : MonoBehaviour
     {
         if (waveManager.getBegineWave())
         {
-            Debug.Log(remainEnemyNum);
             if (remainEnemyNum == 0)
             {
                 waveManager.endWave();

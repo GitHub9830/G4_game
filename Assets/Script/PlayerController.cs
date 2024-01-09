@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -64,6 +65,7 @@ public class PlayerController : MonoBehaviour
     void playerMove()
     {
         var hori = Input.GetAxisRaw("Horizontal");//左右方向の入力(横移動)
+        var vart = Input.GetAxisRaw("Vertical");//上方向の入力(ジャンプ)
 
         //横移動
         if (hori != 0)
@@ -94,7 +96,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         goDown();//ジャンプ中じゃないときの落下
-        jamp();//ジャンプの処理
+        jamp(vart);//ジャンプの処理
         rb.position = new Vector2(Mathf.Clamp(rb.position.x,-mapSize,mapSize),rb.position.y);//プレイヤーの動ける範囲
         moveBackGround.moveBackGround(rb.position);//背景の移動
     }
@@ -129,11 +131,11 @@ public class PlayerController : MonoBehaviour
     }
 
     //プレイヤーのジャンプの処理
-    void jamp()
+    void jamp(float vart)
     {
         if (canJamp)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (vart == 1)
             {
                 jampPos = rb.position.y;
                 maxJampPos = jampPos + jampHeight;

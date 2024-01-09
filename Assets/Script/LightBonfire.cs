@@ -45,12 +45,6 @@ public class LightBonfire : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(bonfireBar.fillAmount);
-        Debug.Log(1 / maxLightTime);
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            downBonfireTime(2);
-        }
         bonfireTimer();//•°‰Î‚ÌŽžŠÔŒv‘ª
         if (lightBonfire)
         {

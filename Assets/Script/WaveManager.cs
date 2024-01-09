@@ -43,10 +43,6 @@ public class WaveManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            remainEnemy.downEnemyNum();
-        }
         textMoveManager();
     }
 
