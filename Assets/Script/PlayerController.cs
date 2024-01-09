@@ -192,10 +192,4 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
-    //“–‚½‚è”»’èi“ü‚Á‚½uŠÔj
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        
-    }
 }

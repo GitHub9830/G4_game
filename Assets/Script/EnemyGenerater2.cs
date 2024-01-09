@@ -35,5 +35,6 @@ public class EnemyGenerater2 : MonoBehaviour
     {
         this.num = 1;
         this.maxNum = num;
+        maxTime *= 0.9f;
     }
 }

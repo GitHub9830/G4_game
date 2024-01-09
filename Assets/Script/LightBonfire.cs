@@ -68,4 +68,12 @@ public class LightBonfire : MonoBehaviour
             bonfireBar.fillAmount -= downSpeed / maxLightTime;
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))//ここのタグを敵にすること(Playerなのは動作確認用)
+        {
+            bonfireBar.fillAmount -= 0.1f;//個々の数値を調整してゲージの減り幅を調節
+        }
+    }
 }
