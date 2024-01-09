@@ -5,13 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class Title : MonoBehaviour
 {
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))//マウス左クリック
+        if (Input.GetKeyDown(KeyCode.U))
         {
             SceneManager.LoadScene("GameScene");//some_senseiシーンをロードする
         }
-
     }
 }
