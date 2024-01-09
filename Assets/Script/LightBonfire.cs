@@ -75,7 +75,7 @@ public class LightBonfire : MonoBehaviour
         }
     }
 
-    void downBonfireTime(float downSpeed)
+    public void downBonfireTime(float downSpeed)
     {
         if(bonfireBar.fillAmount > 0)
         {
