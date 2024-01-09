@@ -8,10 +8,6 @@ public class LightBonfire : MonoBehaviour
     public Image bonfireBar;//焚火の燃える時間
     bool lightBonfire;//焚火が点いているかどうか
 
-    //焚火の色
-    Color lightOn;//点いている
-    Color lightOff;//点いていない
-
     float maxLightTime;
 
     SpriteRenderer bonfireSR;//焚火のSpriteRenderer
@@ -37,8 +33,6 @@ public class LightBonfire : MonoBehaviour
         bonfireSR = this.GetComponent<SpriteRenderer>();
 
         lightBonfire = false;
-        lightOn = new Color(1.0f, 0, 0);
-        lightOff = new Color(1.0f, 1.0f, 1.0f);
 
         maxLightTime = 10f;
     }
@@ -46,14 +40,6 @@ public class LightBonfire : MonoBehaviour
     void Update()
     {
         bonfireTimer();//焚火の時間計測
-        if (lightBonfire)
-        {
-            bonfireSR.color = lightOn;
-        }
-        else
-        {
-            bonfireSR.color = lightOff;
-        }
     }
 
     //焚火の時間計測
