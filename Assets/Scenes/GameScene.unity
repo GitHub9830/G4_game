@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 71714203}
   - component: {fileID: 71714205}
   - component: {fileID: 71714206}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -820,7 +820,7 @@ GameObject:
   m_Component:
   - component: {fileID: 548531846}
   - component: {fileID: 548531847}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1518,6 +1518,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 2860217995657870125, guid: dbe663aadf6c2ed44a10db6f9ef5617e, type: 3}
+  spawnPoint: {x: 0, y: 0}
 --- !u!4 &886606531
 Transform:
   m_ObjectHideFlags: 0
@@ -1546,6 +1547,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy2: {fileID: 2772148880160497809, guid: f788b3af35a76cf4f959e9b3f685e61d, type: 3}
+  spawnPoint: {x: 0, y: 0}
 --- !u!1 &1093408410
 GameObject:
   m_ObjectHideFlags: 0
