@@ -12,7 +12,7 @@ public class WaveManager : MonoBehaviour
     RemainEnemy remainEnemy;
 
     public GameObject player;
-    PlayerController playerController
+    PlayerController playerController;
 
     public GameObject bonfire;
     LightBonfire lightBonfire;
