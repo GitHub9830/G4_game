@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
     //マップのサイズ
     float mapSize;
 
+    public int killEnemy;
+
     //初期値の設定など
     void Start()
     {
@@ -53,6 +55,7 @@ public class PlayerController : MonoBehaviour
         maxJampFlyTime = 0.1f;
 
         mapSize = 20;
+        killEnemy = 0;
     }
 
     //毎秒呼び出される

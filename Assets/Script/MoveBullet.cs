@@ -5,6 +5,7 @@ using UnityEngine;
 public class MoveBullet : MonoBehaviour
 {
     public GameObject player;
+    RemainEnemy remainEnemy;
     PlayerController controller;
     float moveSpeed;
     Rigidbody2D rb;
@@ -12,6 +13,7 @@ public class MoveBullet : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
+        remainEnemy = GameObject.Find("GameManager").GetComponent<RemainEnemy>();
         controller = player.GetComponent<PlayerController>();
         rb = this.GetComponent<Rigidbody2D>();
         moveSpeed = 10f * controller.saveHori;
@@ -34,6 +36,8 @@ public class MoveBullet : MonoBehaviour
         {
             Destroy(gameObject);
             Destroy(collision.gameObject);
+            remainEnemy.downEnemyNum();
+            controller.killEnemy++;
         }
     }
 }

@@ -12,7 +12,7 @@ public class ShotBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(time >= 2f)
+        if(time >= 0.5f)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
