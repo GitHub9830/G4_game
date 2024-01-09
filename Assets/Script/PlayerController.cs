@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
         }
         goDown();//ジャンプ中じゃないときの落下
         jamp(vart);//ジャンプの処理
-        rb.position = new Vector2(Mathf.Clamp(rb.position.x,-mapSize,mapSize),rb.position.y);//プレイヤーの動ける範囲
+        this.transform.position = new Vector2(Mathf.Clamp(this.transform.position.x,-mapSize,mapSize),this.transform.position.y);//プレイヤーの動ける範囲
         moveBackGround.moveBackGround(rb.position);//背景の移動
     }
 
