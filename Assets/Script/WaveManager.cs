@@ -23,7 +23,7 @@ public class WaveManager : MonoBehaviour
     float textEndPosX;
     float textMidPosX;
 
-    int waveCount;//ウェーブのカウント数
+    public static int waveCount;//ウェーブのカウント数
     float textMoveSpeed;//テキストのスピード
     float textMoveTime;//テキストの時間
     float textStopTime;//テキストの停止時間
@@ -124,4 +124,10 @@ public class WaveManager : MonoBehaviour
     {
         return this.begineWave;
     }
+
+    public static int getwaveCount()
+    {
+        return waveCount;
+    }
+
 }
