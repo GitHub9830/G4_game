@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using System.Net.Http.Headers;
 using UnityEngine;
 using TMPro;
-using UnityEditor;
 
 public class WaveManager : MonoBehaviour
 {
-    bool begineWave;
+    bool begineWave;//ウェーブ中かどうか
+    bool moveText;//waveのテキストがうごいているかどうか
     public GameObject WaveCanvasObj;//Wavaのキャンバス
     public TextMeshProUGUI waveTextObj;
+
+    RemainEnemy remainEnemy;
+
     //テキストの位置
-    public float textPosX;
-    public float textStartPosX;
-    public float textEndPosX;
-    public float textMidPosX;
+    float textPosX;
+    float textStartPosX;
+    float textEndPosX;
+    float textMidPosX;
 
     int waveCount;//ウェーブのカウント数
     float textMoveSpeed;//テキストのスピード
@@ -26,29 +29,41 @@ public class WaveManager : MonoBehaviour
     float textMoveRange;//テキストの動く範囲
     void Start()
     {
+        remainEnemy = this.GetComponent<RemainEnemy>();
         begineWave = false;
+        moveText = false;
         waveCount = 1;
         waveTextObj.text = "Wave" + waveCount;
         textMoveTime = 0.5f;
         maxTextStopTime = 1f;
         textStopTime = 1f;
         textMoveRange = 35;
-        WaveCanvasObj.SetActive(begineWave);
     }
 
     void Update()
     {
+        //仮
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            remainEnemy.waveSetter(10);
+            moveText = true;
+        }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            remainEnemy.downEnemyNum();
+        }
         textMoveManager();
     }
 
     void textMoveManager()
     {
-        if (begineWave)
+        if (moveText)
         {
             if (waveTextObj.transform.position.x <= textEndPosX)
             {
-                begineWave = false;
-                WaveCanvasObj.SetActive(begineWave);
+                moveText = false;
+                WaveCanvasObj.SetActive(moveText);
+                begineWave = true;
             }
             else
             {
@@ -80,7 +95,7 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    void startWave()
+    public void startWave()
     {
         float Ppos = Camera.main.transform.position.x;
         textPosX = Ppos + textMoveRange;
@@ -91,7 +106,20 @@ public class WaveManager : MonoBehaviour
         textStopTime = 0;
         textStop = false;
         canTextStop = true;
-        begineWave = true;
-        WaveCanvasObj.SetActive(begineWave);
+        moveText = true;
+        WaveCanvasObj.SetActive(moveText);
+    }
+
+    public void endWave()
+    {
+        begineWave = false;
+        waveCount++;
+        waveTextObj.text = "Wave" + waveCount;
+        startWave();
+    }
+
+    public bool getBegineWave()
+    {
+        return this.begineWave;
     }
 }

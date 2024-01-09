@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -39,7 +37,7 @@ public class PlayerController : MonoBehaviour
         sr = playerSprite.GetComponent<SpriteRenderer>();
         moveBackGround = background.GetComponent<MoveBackGround>();
         
-        moveSpeed = 5f;
+        moveSpeed = 8f;
         stopMove = false;
 
         canJamp = true;
