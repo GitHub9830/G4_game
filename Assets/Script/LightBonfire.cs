@@ -27,11 +27,7 @@ public class LightBonfire : MonoBehaviour
     {
         if(bonfireBar.fillAmount < 1)
         {
-<<<<<<< HEAD
-            bonfireBar.fillAmount += (upSpeed / maxLightTime) * Time.deltaTime;
-=======
-            bonfireBar.fillAmount += (upSpeed / maxLightTime);
->>>>>>> d41bbae1cf0251dc9afa23a428ad81fa15463740
+            bonfireBar.fillAmount += upSpeed / maxLightTime;
         }
     }
 
@@ -43,27 +39,17 @@ public class LightBonfire : MonoBehaviour
         lightBonfire = false;
         lightOn = new Color(1.0f, 0, 0);
         lightOff = new Color(1.0f, 1.0f, 1.0f);
-<<<<<<< HEAD
-        bonfireBar.fillAmount = 1;
-=======
 
         maxLightTime = 10f;
->>>>>>> d41bbae1cf0251dc9afa23a428ad81fa15463740
     }
 
     void Update()
     {
-<<<<<<< HEAD
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            downBonfireTime(1);
-=======
         Debug.Log(bonfireBar.fillAmount);
         Debug.Log(1 / maxLightTime);
         if (Input.GetKeyDown(KeyCode.U))
         {
             downBonfireTime(2);
->>>>>>> d41bbae1cf0251dc9afa23a428ad81fa15463740
         }
         bonfireTimer();//•°‰Î‚ÌŽžŠÔŒv‘ª
         if (lightBonfire)
@@ -99,11 +85,7 @@ public class LightBonfire : MonoBehaviour
     {
         if(bonfireBar.fillAmount > 0)
         {
-<<<<<<< HEAD
-            bonfireBar.fillAmount -= (downSpeed / maxLightTime) * Time.deltaTime;
-=======
-            bonfireBar.fillAmount -= (downSpeed / maxLightTime);
->>>>>>> d41bbae1cf0251dc9afa23a428ad81fa15463740
+            bonfireBar.fillAmount -= downSpeed / maxLightTime;
         }
     }
 
