@@ -255,6 +255,7 @@ MonoBehaviour:
   saveHori: 0
   playerSprite: {fileID: 548531845}
   background: {fileID: 883013915}
+  killEnemy: 0
 --- !u!61 &71714206
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2396,6 +2397,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WaveCanvasObj: {fileID: 1093408410}
   waveTextObj: {fileID: 281566484}
+  player: {fileID: 71714200}
+  bonfire: {fileID: 416180917}
   enemyGenerate: {fileID: 886606529}
   enemyNum: 0
 --- !u!1 &1935446968
