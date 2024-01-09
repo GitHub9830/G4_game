@@ -87,6 +87,10 @@ public class PlayerController : MonoBehaviour
                 {
                     rb.AddForce(Vector2.right * -movePower);
                 }
+                else
+                {
+                    stopMove = false;
+                }
             }
         }
         goDown();//ƒWƒƒƒ“ƒv’†‚¶‚á‚È‚¢‚Æ‚«‚Ì—Ž‰º
