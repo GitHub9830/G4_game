@@ -9,8 +9,13 @@ public class WaveManager : MonoBehaviour
     bool moveText;//waveのテキストがうごいているかどうか
     public GameObject WaveCanvasObj;//Wavaのキャンバス
     public TextMeshProUGUI waveTextObj;
-
     RemainEnemy remainEnemy;
+
+    public GameObject enemyGenerate;
+    EnemyGenerater enemyGenerater;
+    EnemyGenerater2 enemyGenerater2;
+
+    public int enemyNum;
 
     //テキストの位置
     float textPosX;
@@ -29,8 +34,11 @@ public class WaveManager : MonoBehaviour
     void Start()
     {
         remainEnemy = this.GetComponent<RemainEnemy>();
+        enemyGenerater = enemyGenerate.GetComponent<EnemyGenerater>();
+        enemyGenerater2 = enemyGenerate.GetComponent<EnemyGenerater2>();
         begineWave = false;
         moveText = false;
+        enemyNum = 10;
         waveCount = 1;
         waveTextObj.text = "Wave" + waveCount;
         textMoveTime = 0.5f;
@@ -53,7 +61,7 @@ public class WaveManager : MonoBehaviour
             {
                 moveText = false;
                 WaveCanvasObj.SetActive(moveText);
-                remainEnemy.waveSetter(10);
+                remainEnemy.waveSetter(enemyNum);
                 begineWave = true;
             }
             else
@@ -97,6 +105,8 @@ public class WaveManager : MonoBehaviour
         textEndPosX = -textPosX;
         waveTextObj.transform.position = new Vector2(textStartPosX,0);
         textStopTime = 0;
+        enemyGenerater.setNum(enemyNum/2);
+        enemyGenerater2.setNum(enemyNum/2);
         textStop = false;
         canTextStop = true;
     }
@@ -106,6 +116,7 @@ public class WaveManager : MonoBehaviour
         begineWave = false;
         waveCount++;
         waveTextObj.text = "Wave" + waveCount;
+        enemyNum += 2;
         startWave();
     }
 

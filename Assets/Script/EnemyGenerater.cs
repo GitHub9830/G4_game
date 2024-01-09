@@ -5,21 +5,34 @@ using UnityEngine;
 public class EnemyGenerater: MonoBehaviour
 {    public GameObject enemy;
 
-    int num = 0;
+    int num;
+    int maxNum;
+    float time;
+    float maxTime;
 
     void Start()
     {
+        maxTime = 2.1f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        num++;
-        if (num % 250 == 0)
+        if(num <= maxNum)
         {
-            Instantiate(enemy, new Vector3(-24,-3,0), Quaternion.identity);
-
+            time += Time.deltaTime;
+            if (time >= maxTime)
+            {
+                Instantiate(enemy, new Vector3(-24, -3, 0), Quaternion.identity);
+                num++;
+                time = 0;
+            }
         }
+    }
 
+    public void setNum(int num)
+    {
+        this.num = 1;
+        this.maxNum = num;
     }
 }
