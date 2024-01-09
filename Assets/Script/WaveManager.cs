@@ -38,16 +38,11 @@ public class WaveManager : MonoBehaviour
         maxTextStopTime = 1f;
         textStopTime = 1f;
         textMoveRange = 35;
+        startWave();
     }
 
     void Update()
     {
-        //‰¼
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            remainEnemy.waveSetter(10);
-            moveText = true;
-        }
         if (Input.GetKeyDown(KeyCode.K))
         {
             remainEnemy.downEnemyNum();
@@ -63,6 +58,7 @@ public class WaveManager : MonoBehaviour
             {
                 moveText = false;
                 WaveCanvasObj.SetActive(moveText);
+                remainEnemy.waveSetter(10);
                 begineWave = true;
             }
             else
@@ -97,6 +93,8 @@ public class WaveManager : MonoBehaviour
 
     public void startWave()
     {
+        moveText = true;
+        WaveCanvasObj.SetActive(moveText);
         float Ppos = Camera.main.transform.position.x;
         textPosX = Ppos + textMoveRange;
         textMoveSpeed = textPosX / textMoveTime;
@@ -106,8 +104,6 @@ public class WaveManager : MonoBehaviour
         textStopTime = 0;
         textStop = false;
         canTextStop = true;
-        moveText = true;
-        WaveCanvasObj.SetActive(moveText);
     }
 
     public void endWave()

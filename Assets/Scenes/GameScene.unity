@@ -1490,7 +1490,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1093408411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1905,6 +1905,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9267370960f51c74ba745ea77bdf4ffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waveManager: {fileID: 0}
   remainEnemyNumText: {fileID: 1719161716}
   changeEnemyNum: 0
   remainEnemyNum: 0

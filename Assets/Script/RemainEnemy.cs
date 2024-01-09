@@ -8,13 +8,11 @@ public class RemainEnemy : MonoBehaviour
     public WaveManager waveManager;
     public TextMeshProUGUI remainEnemyNumText;
 
-    public bool changeEnemyNum;
-    public int remainEnemyNum;
+    int remainEnemyNum;
 
     void Start()
     {
         waveManager = this.GetComponent<WaveManager>();
-        remainEnemyNum = 0;
     }
 
     // Update is called once per frame
@@ -22,6 +20,7 @@ public class RemainEnemy : MonoBehaviour
     {
         if (waveManager.getBegineWave())
         {
+            Debug.Log(remainEnemyNum);
             if (remainEnemyNum == 0)
             {
                 waveManager.endWave();
@@ -32,13 +31,16 @@ public class RemainEnemy : MonoBehaviour
     public void waveSetter(int num)
     {
 
-        remainEnemyNum = num;
+        this.remainEnemyNum = num;
         remainEnemyNumText.text = "EnemyNum:" + remainEnemyNum;
     }
 
     public void downEnemyNum()
     {
-        remainEnemyNum--;
+        if(remainEnemyNum > 0)
+        {
+            remainEnemyNum--;
+        }
         remainEnemyNumText.text = "EnemyNum:" + remainEnemyNum;
     }
 }
