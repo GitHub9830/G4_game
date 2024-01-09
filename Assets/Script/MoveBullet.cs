@@ -4,15 +4,36 @@ using UnityEngine;
 
 public class MoveBullet : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject player;
+    PlayerController controller;
+    float moveSpeed;
+    Rigidbody2D rb;
+    float time;
     void Start()
     {
-        
+        player = GameObject.Find("Player");
+        controller = player.GetComponent<PlayerController>();
+        rb = this.GetComponent<Rigidbody2D>();
+        moveSpeed = 10f * controller.saveHori;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        rb.velocity = new Vector2(moveSpeed, 0);
+        time += Time.deltaTime;
+        if(time > 5)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(this);
+            Destroy(collision.gameObject);
+        }
     }
 }

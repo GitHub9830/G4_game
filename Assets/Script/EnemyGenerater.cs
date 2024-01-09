@@ -5,8 +5,6 @@ using UnityEngine;
 public class EnemyGenerater: MonoBehaviour
 {    public GameObject enemy;
 
-    public Vector2 spawnPoint;
-
     int num;
     int maxNum;
     float time;
@@ -14,7 +12,6 @@ public class EnemyGenerater: MonoBehaviour
 
     void Start()
     {
-        spawnPoint = new Vector3(-24, -3);
         maxTime = 2.1f;
     }
 

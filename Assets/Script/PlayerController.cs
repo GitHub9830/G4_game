@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     float moveSpeed;//プレイヤーの横移動の速度
     float movePower;//プレイヤーの横移動の速度
     bool stopMove;//プレイヤーの横移動が終わったかどうか
+    public float saveHori;
 
     Rigidbody2D rb;//プレイヤーのRIgidbody2Dを入れるところ
     public GameObject playerSprite;
@@ -69,6 +70,7 @@ public class PlayerController : MonoBehaviour
         //横移動
         if (hori != 0)
         {
+            saveHori = hori;
             changeSpriteDir(hori);//進んでいる方向に画像を合わせる
             //押したら動く
             if (Mathf.Abs(rb.velocity.x) < moveSpeed)
