@@ -1,19 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LightBonfire : MonoBehaviour
 {
+    public Image bonfireBar;//焚火の燃える時間
     bool lightBonfire;//焚火が点いているかどうか
-    float lightTime;//焚火の点灯時間
-    float maxLightTime;//焚火の点灯最大時間
 
     //焚火の色
     Color lightOn;//点いている
     Color lightOff;//点いていない
 
-    float addTimeScale;//焚火の追加点灯時間
-
+    float maxLightTime;
 
     SpriteRenderer bonfireSR;//焚火のSpriteRenderer
 
@@ -24,9 +23,12 @@ public class LightBonfire : MonoBehaviour
     }
 
     //他のスクリプトで焚火の効果時間を伸ばしたいときに呼び出してください
-    public void addLightTime()
+    public void addLightTime(float upSpeed)
     {
-        if(lightTime < maxLightTime)lightTime += addTimeScale;
+        if(bonfireBar.fillAmount < 1)
+        {
+            bonfireBar.fillAmount += (upSpeed / maxLightTime) * Time.deltaTime;
+        }
     }
 
     //初期値の設定など
@@ -35,15 +37,17 @@ public class LightBonfire : MonoBehaviour
         bonfireSR = this.GetComponent<SpriteRenderer>();
 
         lightBonfire = false;
-        lightTime = 2;
-        maxLightTime = 10;
         lightOn = new Color(1.0f, 0, 0);
         lightOff = new Color(1.0f, 1.0f, 1.0f);
-        addTimeScale = 1;
+        bonfireBar.fillAmount = 1;
     }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            downBonfireTime(1);
+        }
         bonfireTimer();//焚火の時間計測
         if (lightBonfire)
         {
@@ -58,28 +62,32 @@ public class LightBonfire : MonoBehaviour
     //焚火の時間計測
     void bonfireTimer()
     {
-        if (lightTime > 0)
+        if (bonfireBar.fillAmount > 0)
         {
             //0以上の時は点灯
             if (!lightBonfire) lightBonfire = true;
-            lightTime -= Time.deltaTime;
         }
         else
         {
             //0以下の時は消灯
             if (lightBonfire)
             {
+                bonfireBar.fillAmount = 0;
                 lightBonfire = false;
-                lightTime = 0;
             }
+        }
+    }
+
+    void downBonfireTime(float downSpeed)
+    {
+        if(bonfireBar.fillAmount > 0)
+        {
+            bonfireBar.fillAmount -= (downSpeed / maxLightTime) * Time.deltaTime;
         }
     }
 
     void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player")
-        {
-            addLightTime();//焚火の時間追加
-        }
+
     }
 }
