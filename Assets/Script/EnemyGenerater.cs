@@ -18,7 +18,7 @@ public class EnemyGenerater: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(num <= maxNum)
+        if(num < maxNum)
         {
             time += Time.deltaTime;
             if (time >= maxTime)
@@ -32,7 +32,7 @@ public class EnemyGenerater: MonoBehaviour
 
     public void setNum(int num)
     {
-        this.num = 1;
+        this.num = 0;
         this.maxNum = num;
         maxTime *= 0.9f;
     }

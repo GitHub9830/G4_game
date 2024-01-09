@@ -98,6 +98,13 @@ public class PlayerController : MonoBehaviour
                     stopMove = false;
                 }
             }
+            else
+            {
+                if(rb.velocity.x != 0)
+                {
+                    rb.velocity = new Vector2(0,0);
+                }
+            }
         }
         goDown();//ジャンプ中じゃないときの落下
         jamp(vart);//ジャンプの処理

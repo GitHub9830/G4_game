@@ -63,6 +63,8 @@ public class WaveManager : MonoBehaviour
                 WaveCanvasObj.SetActive(moveText);
                 remainEnemy.waveSetter(enemyNum);
                 begineWave = true;
+                enemyGenerater.setNum(enemyNum / 2);
+                enemyGenerater2.setNum(enemyNum / 2);
             }
             else
             {
@@ -105,8 +107,6 @@ public class WaveManager : MonoBehaviour
         textEndPosX = -textPosX;
         waveTextObj.transform.position = new Vector2(textStartPosX,0);
         textStopTime = 0;
-        enemyGenerater.setNum(enemyNum/2);
-        enemyGenerater2.setNum(enemyNum/2);
         textStop = false;
         canTextStop = true;
     }
