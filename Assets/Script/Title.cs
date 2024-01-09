@@ -7,7 +7,7 @@ public class Title : MonoBehaviour
 {
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.U))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             SceneManager.LoadScene("GameScene");//some_senseiシーンをロードする
         }
