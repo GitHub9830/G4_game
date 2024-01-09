@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LightBonfire : MonoBehaviour
 {
@@ -9,8 +10,6 @@ public class LightBonfire : MonoBehaviour
     bool lightBonfire;//焚火が点いているかどうか
 
     float maxLightTime;
-
-    SpriteRenderer bonfireSR;//焚火のSpriteRenderer
 
     //他のスクリプトで焚火が点いているかを取得するときに呼び出してください
     public bool getLightBonfire()
@@ -30,8 +29,6 @@ public class LightBonfire : MonoBehaviour
     //初期値の設定など
     void Start()
     {
-        bonfireSR = this.GetComponent<SpriteRenderer>();
-
         lightBonfire = false;
 
         maxLightTime = 10f;
@@ -40,6 +37,10 @@ public class LightBonfire : MonoBehaviour
     void Update()
     {
         bonfireTimer();//焚火の時間計測
+        if (!lightBonfire)
+        {
+            SceneManager.LoadScene("GameENDScene");
+        }
     }
 
     //焚火の時間計測
