@@ -24,7 +24,7 @@ public class MoveBullet : MonoBehaviour
         time += Time.deltaTime;
         if(time > 5)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 
@@ -32,7 +32,7 @@ public class MoveBullet : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Enemy"))
         {
-            Destroy(this);
+            Destroy(gameObject);
             Destroy(collision.gameObject);
         }
     }

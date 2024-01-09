@@ -7,12 +7,22 @@ public class ShotBullet : MonoBehaviour
     public GameObject spawnPoint;
     public GameObject bullet;
 
+    float time;
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if(time >= 2f)
         {
-            InsBullet();
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                InsBullet();
+                time = 0;
+            }
+        }
+        else
+        {
+            time += Time.deltaTime;
         }
     }
 
