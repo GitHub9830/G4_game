@@ -11,9 +11,6 @@ public class WaveManager : MonoBehaviour
     public TextMeshProUGUI waveTextObj;
     RemainEnemy remainEnemy;
 
-    public GameObject player;
-    PlayerController playerController;
-
     public GameObject bonfire;
     LightBonfire lightBonfire;
 
@@ -30,6 +27,7 @@ public class WaveManager : MonoBehaviour
     float textMidPosX;
 
     public static int waveCount;//ウェーブのカウント数
+    public static int killEnemy;
     float textMoveSpeed;//テキストのスピード
     float textMoveTime;//テキストの時間
     float textStopTime;//テキストの停止時間
@@ -42,12 +40,12 @@ public class WaveManager : MonoBehaviour
         remainEnemy = this.GetComponent<RemainEnemy>();
         enemyGenerater = enemyGenerate.GetComponent<EnemyGenerater>();
         enemyGenerater2 = enemyGenerate.GetComponent<EnemyGenerater2>();
-        playerController = player.GetComponent<PlayerController>();
         lightBonfire = bonfire.GetComponent<LightBonfire>();
         begineWave = false;
         moveText = false;
         enemyNum = 10;
         waveCount = 1;
+        killEnemy = 0;
         waveTextObj.text = "Wave" + waveCount;
         textMoveTime = 0.5f;
         maxTextStopTime = 1f;
@@ -140,8 +138,13 @@ public class WaveManager : MonoBehaviour
     {
         return waveCount;
     }
-    public int getKillCount()
+    public static int getKillCount()
     {
-        return playerController.killEnemy;
+        return killEnemy;
+    }
+
+    public void addKillCount()
+    {
+        killEnemy++;
     }
 }

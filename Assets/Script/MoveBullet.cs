@@ -4,19 +4,30 @@ using UnityEngine;
 
 public class MoveBullet : MonoBehaviour
 {
-    public GameObject player;
+    GameObject gameManager;
+    GameObject player;
     RemainEnemy remainEnemy;
+    WaveManager waveManager;
     PlayerController controller;
+    ShotBullet shotBullet;
     float moveSpeed;
     Rigidbody2D rb;
     float time;
     void Start()
     {
-        player = GameObject.Find("Player");
-        remainEnemy = GameObject.Find("GameManager").GetComponent<RemainEnemy>();
+        player = GameObject.Find("Player").gameObject;
+        gameManager = GameObject.Find("GameManager").gameObject;
         controller = player.GetComponent<PlayerController>();
+        shotBullet = player.GetComponent<ShotBullet>();
+        shotBullet.addBulletNum();
+        remainEnemy = gameManager.GetComponent<RemainEnemy>();
+        waveManager = gameManager.GetComponent<WaveManager>();
         rb = this.GetComponent<Rigidbody2D>();
         moveSpeed = 10f * controller.saveHori;
+        if(moveSpeed == 0)
+        {
+            moveSpeed = -10f;
+        }
     }
 
     // Update is called once per frame
@@ -27,6 +38,7 @@ public class MoveBullet : MonoBehaviour
         if(time > 5)
         {
             Destroy(gameObject);
+            shotBullet.disBulletNum();
         }
     }
 
@@ -36,8 +48,9 @@ public class MoveBullet : MonoBehaviour
         {
             Destroy(gameObject);
             Destroy(collision.gameObject);
+            shotBullet.disBulletNum();
             remainEnemy.downEnemyNum();
-            controller.killEnemy++;
+            waveManager.addKillCount();
         }
     }
 }

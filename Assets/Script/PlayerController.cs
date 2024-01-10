@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     //マップのサイズ
     float mapSize;
 
-    public int killEnemy;
+    float time;
 
     //初期値の設定など
     void Start()
@@ -55,7 +55,8 @@ public class PlayerController : MonoBehaviour
         maxJampFlyTime = 0.1f;
 
         mapSize = 20;
-        killEnemy = 0;
+
+        time = 0;
     }
 
     //毎秒呼び出される
@@ -88,6 +89,7 @@ public class PlayerController : MonoBehaviour
             //ドリフト減少防止用
             if (stopMove)
             {
+                time += Time.deltaTime;
                 //0にするとうまくいきません。おそらく0の時にプログラムの処理が間に合っていないから
                 if (Mathf.Abs(rb.velocity.x) > moveSpeed/10)
                 {
@@ -97,12 +99,15 @@ public class PlayerController : MonoBehaviour
                 {
                     stopMove = false;
                 }
-            }
-            else
-            {
-                if(rb.velocity.x != 0)
+
+                if(time >= 1f)
                 {
-                    rb.velocity = new Vector2(0,0);
+                    if (rb.velocity.x != 0)
+                    {
+                        rb.velocity = new Vector2(0, 0);
+                        time = 0;
+                        stopMove = false;
+                    }
                 }
             }
         }

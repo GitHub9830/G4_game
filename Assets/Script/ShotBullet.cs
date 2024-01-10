@@ -8,22 +8,42 @@ public class ShotBullet : MonoBehaviour
     public GameObject bullet;
 
     float time;
+    int nowBulletNum;
+    int maxBulletNum;
+
+    void Start()
+    {
+        maxBulletNum = 5;
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if(time >= 0.5f)
+        if(nowBulletNum < maxBulletNum)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (time >= 0.5f)
             {
-                InsBullet();
-                time = 0;
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    InsBullet();
+                    time = 0;
+                }
+            }
+            else
+            {
+                time += Time.deltaTime;
             }
         }
-        else
-        {
-            time += Time.deltaTime;
-        }
+    }
+
+    public void addBulletNum()
+    {
+        nowBulletNum++;
+    }
+
+    public void disBulletNum()
+    {
+        nowBulletNum--;
     }
 
     void InsBullet()
